@@ -1,6 +1,4 @@
-import os
 import requests
-from typing import Optional
 
 _api_key: str = ""
 _api_base: str =""

@@ -1,8 +1,8 @@
 # File: soteria_sdk/__init__.py
 
-from .client import configure
-from .exceptions import SoteriaValidationError
-from .decorators import guard_prompt
+from soteria_sdk.client import configure
+from soteria_sdk.exceptions import SoteriaValidationError
+from soteria_sdk.decorators import guard_prompt
 
 # -- Redaction Guards --
 guard_pii = guard_prompt(guard_name="pii-redactor", prompt_arg="prompt")

@@ -1,8 +1,8 @@
 from functools import wraps
 from typing import Callable, Any
 
-from .client import make_request
-from .exceptions import SoteriaValidationError
+from soteria_sdk.client import make_request
+from soteria_sdk.exceptions import SoteriaValidationError
 
 def guard_prompt(guard_name: str, prompt_arg: str) -> Callable:
     """
