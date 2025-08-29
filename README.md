@@ -22,6 +22,7 @@ Before using the Soteria SDK, you need to configure it with your API key and the
 The primary way to configure the SDK is by calling the `soteria_sdk.configure()` function:
 
 ```python
+
 import soteria_sdk
 
 # Configure with your API key and optionally a custom API base URL
@@ -60,14 +61,16 @@ When a function decorated with a pre-configured guard is called, the SDK automat
 Here's a basic example of how to use a pre-configured guard:
 
 ```python
+
 import soteria_sdk
 
 # 1. Configure Soteria (replace with your actual API key)
 soteria_sdk.configure(api_key="YOUR_API_KEY_HERE", api_base="https://api.soteriainfra.com")
 
+
 # 2. Define a function that sends a prompt to an LLM
 #    Apply the guard_pii decorator to the 'user_prompt' argument
-@soteria.guard_pii
+@soteria_sdk.guard_pii
 def send_to_llm(prompt: str):
     """
     Simulates sending a prompt to an LLM.
@@ -76,6 +79,7 @@ def send_to_llm(prompt: str):
     print(f"Sending to LLM: {prompt}")
     # In a real application, you would call your LLM API here
     return f"LLM response to: {prompt}"
+
 
 # Example calls
 try:
@@ -136,17 +140,20 @@ Effective error handling is crucial when integrating Soteria into your applicati
 When a prompt fails validation due to a `BLOCK` or `EXCEPTION` `on_fail` action configured for a validator on the server, the `@guard_prompt` decorator raises a `soteria.SoteriaValidationError`. You should wrap your guarded function calls in `try...except` blocks to gracefully handle these scenarios.
 
 ```python
+
 import soteria_sdk
 
 soteria_sdk.configure(api_key="YOUR_API_KEY_HERE", api_base="https://api.soteriainfra.com")
 
-@soteria.guard_profanity
+
+@soteria_sdk.guard_profanity
 def send_message(prompt: str):
     print(f"Sending message: {prompt}")
 
+
 try:
     send_message(prompt="Hello, world!")
-    send_message(prompt="This is a bad word.") # This will trigger the error
+    send_message(prompt="This is a bad word.")  # This will trigger the error
 except soteria_sdk.SoteriaValidationError as e:
     print("\n--- Soteria Validation Error Caught ---")
     print(f"Error Message: {e}")

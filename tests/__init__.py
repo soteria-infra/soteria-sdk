@@ -1,0 +1,1 @@
+# Tests for soteria-sdk should come in here
