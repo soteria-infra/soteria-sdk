@@ -11,7 +11,7 @@ def guard_prompt(guard_name: str, prompt_arg: str) -> Callable:
     def decorator(func: Callable) -> Callable:
         @wraps(func)
         def wrapper(*args, **kwargs) -> Any:
-            prompt = kwargs.get(prompt_arg)
+            prompt: Any = kwargs.get(prompt_arg)
             if prompt is None:
                 raise ValueError(f"Argument '{prompt_arg}' not found in function call.")
             
@@ -23,7 +23,6 @@ def guard_prompt(guard_name: str, prompt_arg: str) -> Callable:
                     f"Summary: {outcome.get('validation_summaries')}"
                 )
             
-            # Replace the original prompt with the processed one
             kwargs[prompt_arg] = outcome.get("processed_prompt")
             
             return func(*args, **kwargs)
